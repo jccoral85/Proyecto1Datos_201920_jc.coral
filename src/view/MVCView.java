@@ -18,7 +18,7 @@ public class MVCView
 			System.out.println("----------------proyecto1-------------------");
 			System.out.println("0. Cargar los datos del trimestre");
 			
-			System.out.println("1. Consultar el tiempo promedio de viaje y su desviación estándar de los viajes entre una zona de origen y una zona destino para un día dado del mes.");
+			System.out.println("1. Consultar el tiempo promedio de viaje y su desviación estándar de los viajes entre una zona de origen y una zona destino para un mes dado.");
 			System.out.println("2. Consultar la información de los N viajes con mayor tiempo promedio para un mes dado.");
 			System.out.println("3. Comparar los tiempos promedios de los viajes para una zona dada de ida y vuelta para un mes dado");
 			System.out.println("4. Consultar el tiempo promedio de viaje y su desviación estándar de los viajes entre una zona de origen y una zona destino para un día dado de la semana");

@@ -1,6 +1,6 @@
 package model.logic;
 
-public class Viaje {
+public class Viaje implements Comparable<Viaje>{
 	private int  sourceid;
 
 	private int dstid;
@@ -63,9 +63,25 @@ public class Viaje {
 		return desviacionGeometrica;
 	}
 
+	@Override
+	public int compareTo(Viaje o ) {
+		// TODO Auto-generated method stub
 
+		if(this.getTiempo() > o.getTiempo())
+		{
+			return 1;
+		}
+		
+		else if(this.getTiempo() < o.getTiempo())
+		{
+			return -1;
+		}
+		return 0;
+	}
 
 
 
 
 }
+
+

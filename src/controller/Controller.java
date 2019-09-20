@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.opencsv.CSVReader;
@@ -242,6 +243,11 @@ public class Controller {
 		}
 
 	}
+	
+	
+	
+	
+	
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
@@ -307,75 +313,101 @@ public class Controller {
 					System.out.println("La zona con mayor identificador es: " + darMayorID());
 				}
 				break;
-			}
+			
 
 
 
-			//				case 1:
-			//					System.out.println("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-			//				    int capacidad = lector.nextInt();
-			//				    modelo = new MVCModelo(capacidad); 
-			//					System.out.println("Arreglo Dinamico creado");
-			//					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-			//					break;
-			//
-			//				case 2:
-			//					System.out.println("--------- \nDar cadena (simple) a ingresar: ");
-			//					dato = lector.next();
-			//					modelo.agregar(dato);
-			//					System.out.println("Dato agregado");
-			//					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-			//					break;
-			//
-			//				case 3:
-			//					System.out.println("--------- \nDar cadena (simple) a buscar: ");
-			//					dato = lector.next();
-			//					respuesta = modelo.buscar(dato);
-			//					if ( respuesta != null)
-			//					{
-			//						System.out.println("Dato encontrado: "+ respuesta);
-			//					}
-			//					else
-			//					{
-			//						System.out.println("Dato NO encontrado");
-			//					}
-			//					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-			//					break;
-			//
-			//				case 4:
-			//					System.out.println("--------- \nDar cadena (simple) a eliminar: ");
-			//					dato = lector.next();
-			//					respuesta = modelo.eliminar(dato);
-			//					if ( respuesta != null)
-			//					{
-			//						System.out.println("Dato eliminado "+ respuesta);
-			//					}
-			//					else
-			//					{
-			//						System.out.println("Dato NO eliminado");							
-			//					}
-			//					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-			//					break;
-			//
-			//				case 5: 
-			//					System.out.println("--------- \nContenido del Arreglo: ");
-			//					view.printModelo(modelo);
-			//					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-			//					break;	
-			//					
-			//				case 6: 
-			//					System.out.println("--------- \n Hasta pronto !! \n---------"); 
-			//					lector.close();
-			//					fin = true;
-			//					break;	
-
-			//				default: 
-			//					System.out.println("--------- \n Opcion Invalida !! \n---------");
-			//					break;
-			//			}
+			case 1:
+				
+				view.printMessage("Ingrese el origen que quiere.");
+				int origen = lector.nextInt();
+				view.printMessage("Ingrese el destino que quiere.");
+				int destino = lector.nextInt();
+				view.printMessage("Ingrese el mes que quiere.");
+				int mes = lector.nextInt();
+				
+				double promedio = modelo.darPromedioTiempo(origen, destino, mes, viajesMes);
+				double desv = modelo.darDesviacion(origen, destino, mes, viajesMes);
+				
+				if(promedio == 0 || desv == 0)
+				{
+					System.out.println("No existe informacion sobre ese viaje y mes en este trimestre.");
+				}
+				
+				else
+				{
+					System.out.println("El tiempo promedio de viaje es: " + promedio + "segundos con una desviacion estandar de " + desv + "." );
+				}
+				break;
+				
+			case 2:
+				view.printMessage("Ingrese el mes que quiere.");
+				int mes2 = lector.nextInt();
+				view.printMessage("Ingrese el numero de viajes que quiere ver");
+				int n = lector.nextInt();
+				
+				Queue<Viaje> viajes = viajesMes;
+				Queue <Viaje> r = new Queue<Viaje>();
+				Queue <Viaje> p = modelo.darViajesPedidos(mes2, viajes);
+				Viaje [] a = modelo.arreglo(p);
+				Queue <Viaje> o = modelo.darViajesOrdenados(n, a);
+				Viaje check = o.dequeue();
+				for(int i = 0; i < o.size();i++)
+				{
+					Viaje res = o.dequeue();
+					System.out.println(check);
+					System.out.println("zona origen: " + res.getSourceid()+", zona destino: " + res.getDstid() + ", tiempo promedio: " + res.getTiempo() + ", desviacion estandar: " + res.getDesviacion());
+				}
+				break;
+				
+			case 3:
+				
+			case 4:
+				view.printMessage("Ingrese el origen que quiere.");
+				int origin = lector.nextInt();
+				view.printMessage("Ingrese el destino que quiere.");
+				int dest = lector.nextInt();
+				view.printMessage("Ingrese el dia de la semana que quiere.");
+				int dia = lector.nextInt();
+				
+				double promedio1 = modelo.darPromedioTiempo(origin, dest, dia, viajesSemana);
+				double desv1 = modelo.darDesviacion(origin, dest, dia, viajesSemana);
+				
+				if(promedio1 == 0 || desv1 == 0)
+				{
+					System.out.println("No existe informacion sobre ese viaje y dia en este trimestre.");
+				}
+				
+				else
+				{
+					System.out.println("El tiempo promedio de viaje es: " + promedio1 + "segundos con una desviacion estandar de " + desv1 + "." );
+				}
+				break;
+				
+			case 5:
+				view.printMessage("Ingrese el dia que quiere.");
+				int dia1 = lector.nextInt();
+				view.printMessage("Ingrese el numero de viajes que quiere ver");
+				int n1 = lector.nextInt();
+				
+				Queue<Viaje> viajes1 = viajesMes;
+				Queue <Viaje> r1 = new Queue<Viaje>();
+				Queue <Viaje> p1 = modelo.darViajesPedidos(dia1, viajes1);
+				Viaje [] a1 = modelo.arreglo(p1);
+				Queue <Viaje> o1 = modelo.darViajesOrdenados(n1, a1);
+				for(int i = 0; i < o1.size();i++)
+				{
+					Viaje res = o1.dequeue();
+					
+					System.out.println("zona origen: " + res.getSourceid()+", zona destino: " + res.getDstid() + ", tiempo promedio: " + res.getTiempo() + ", desviacion estandar: " + res.getDesviacion());
+				}
+				break;
+			
 		}
 	}
 }
+
+	}
 
 
 
